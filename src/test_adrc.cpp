@@ -24,7 +24,6 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	//int sample_num;
 	short buffer[FRAME];
 
 	float mTargetGainmB = 100;
@@ -35,14 +34,15 @@ int main(int argc, char **argv)
 
 	while (!in.eof()) {
 		in.read(reinterpret_cast<char*>(buffer), sizeof(buffer));
-		for (int inIdx = 0; inIdx < FRAME / 2; inIdx += 2) {
+		int sampleNum = in.gcount() / 2;
+		for (int inIdx = 0; inIdx < sampleNum / 2; inIdx += 2) {
 			float left = buffer[2 * inIdx];
 			float right = buffer[2 * inIdx + 1];
 			mCompressor->Compress(&left, &right);
 			buffer[2 * inIdx] = (short)left;
 			buffer[2 * inIdx + 1] = (short)right;
 		}
-		out.write(reinterpret_cast<char*>(buffer), sizeof(buffer));
+		out.write(reinterpret_cast<char*>(buffer), sampleNum * sizeof(short));
 	}
 
 	std::cout << "Done!" << std::endl;
