@@ -1,57 +1,54 @@
-#include <stdio.h>
+#include <memory>
+#include <iostream>
+#include <fstream>
 #include "dsp/core/dynamic_range_compression.h"
-
-using namespace le_fx;
 
 #define FRAME 1024
 
 int main(int argc, char **argv)
 {
-	FILE *in, *out;
-	int sample_num;
-	short inbuf[FRAME];
-
 	if (argc != 3) {
-		fprintf(stderr, "usage: adrc input.pcm output.pcm\n");
+		std::cerr << "usage: adrc input.pcm output.pcm" << std::endl;
 		return -1;
 	}
 
-	in = fopen(argv[1], "rb");
+	std::ifstream in(argv[1], std::ios::binary);
 	if (in == NULL) {
-		fprintf(stderr, "open input file error: %s\n", argv[1]);
+		std::cerr << "open input file error: " << argv[1] << std::endl;
 		return -1;
 	}
 
-	out = fopen(argv[2], "wb");
+	std::ofstream out(argv[2], std::ios::binary);
 	if (out == NULL) {
-		fprintf(stderr, "open input file error: %s\n", argv[2]);
+		std::cerr << "open input file error: " << argv[2] << std::endl;
 		return -1;
 	}
 
-	float mTargetGainmB = 10;
+	//int sample_num;
+	short buffer[FRAME];
+
+	float mTargetGainmB = 100;
 	float targetAmp = pow(10, mTargetGainmB/2000.0f); // mB to linear amplification
 	float samplingRate = 44100;
-	le_fx::AdaptiveDynamicRangeCompression* mCompressor = new le_fx::AdaptiveDynamicRangeCompression();
+	auto mCompressor = std::make_shared<le_fx::AdaptiveDynamicRangeCompression>();
 	mCompressor->Initialize(targetAmp, samplingRate);
 
-	while ((sample_num = fread(inbuf, sizeof(short), FRAME, in)) > 0) {
-		for (int inIdx = 0; inIdx < sample_num / 2; inIdx += 2) {
-			float left = inbuf[2 * inIdx];
-			float right = inbuf[2 * inIdx + 1];
+	while (!in.eof()) {
+		in.read(reinterpret_cast<char*>(buffer), sizeof(buffer));
+		for (int inIdx = 0; inIdx < FRAME / 2; inIdx += 2) {
+			float left = buffer[2 * inIdx];
+			float right = buffer[2 * inIdx + 1];
 			mCompressor->Compress(&left, &right);
-			inbuf[2 * inIdx] = (short)left;
-			inbuf[2 * inIdx + 1] = (short)right;
+			buffer[2 * inIdx] = (short)left;
+			buffer[2 * inIdx + 1] = (short)right;
 		}
-		fwrite(inbuf, sizeof(short), sample_num, out);
-		fflush(out);
+		out.write(reinterpret_cast<char*>(buffer), sizeof(buffer));
 	}
 
-	printf("Done!\n");
+	std::cout << "Done!" << std::endl;
 
-	delete mCompressor;
-
-	fclose(out);
-	fclose(in);
+	out.close();
+	in.close();
 
 	return 0;
 }

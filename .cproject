@@ -25,6 +25,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.495925416" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;D:\projects\AndroidDrc\src&quot;"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.dialect.std.1041093412" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" value="gnu.cpp.compiler.dialect.c++1y" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2011398440" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1370744843" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
@@ -47,9 +48,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="AndroidDrc.null.1188209186" name="AndroidDrc"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
@@ -57,4 +55,14 @@
 			<resource resourceType="PROJECT" workspacePath="/AndroidDrc"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.mingw.base.1839260273;cdt.managedbuild.toolchain.gnu.mingw.base.1839260273.1815282328;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.15145303;cdt.managedbuild.tool.gnu.cpp.compiler.input.2011398440">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.mingw.base.1839260273;cdt.managedbuild.toolchain.gnu.mingw.base.1839260273.1815282328;cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1370744843;cdt.managedbuild.tool.gnu.c.compiler.input.1723065559">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
