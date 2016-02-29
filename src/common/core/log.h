@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include <cstdio>
+
 #define LOGV ALOGV
 #define LOGD ALOGD
 #define LOGE ALOGE

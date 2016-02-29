@@ -18,6 +18,9 @@
     <ClCompile Include="..\src\dsp\core\dynamic_range_compression.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\test_adrc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\dsp\core\interpolator_linear.h">
