@@ -1,0 +1,9 @@
+# Visual C++ cache files
+*.opensdf
+*.sdf
+*.suo
+*.opt
+*.plg
+
+Debug/
+Release/
